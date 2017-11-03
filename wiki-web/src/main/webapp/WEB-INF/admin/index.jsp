@@ -11,6 +11,7 @@
 <link href="../resources/css/admin/index.css" rel="stylesheet"> 
 <script src="../resources/js/jquery-3.2.1.min.js"></script>
 <script src="../resources/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+<script src="../resources/js/elementAuth.js"></script>
 <script src="../resources/js/admin/index.js"></script>
 <script src="../resources/plugin/echarts.min.js"></script>
 <script src="../resources/plugin/layer/layer.js"></script>
@@ -64,7 +65,9 @@
   	<dl class="nav-dl dl-act">
       <dt>用户管理</dt>
       <dd id="u-account-min">· 用户帐号管理</dd>
-      <dd id="u-role-min">· 用户角色管理</dd>
+      <sec:authorize url="/admin/user/role/delete">
+      	<dd id="u-role-min">· 用户角色管理</dd>
+      </sec:authorize>
       <dd id="u-msg-min">· 用户信息管理</dd>
       <dd id="u-chart-min">· 用户图表</dd>
       <!-- <dd id="au-chart">· 用户活跃图表</dd> -->
@@ -94,7 +97,9 @@
     <dl class="nav-dl dl-act">
       <dt>用户管理</dt>
       <dd id="u-account">· 用户帐号管理</dd>
-      <dd id="u-role">· 用户角色管理</dd>
+      <sec:authorize url="/admin/user/role/delete">
+      	<dd id="u-role">· 用户角色管理</dd>
+      </sec:authorize>
       <dd id="u-msg">· 用户信息管理</dd>
       <dd id="u-chart">· 用户图表</dd>
       <!-- <dd id="au-chart">· 用户活跃图表</dd> -->
@@ -120,6 +125,11 @@
       <dd id="wiki-category">· 词条类型管理</dd>
     </dl>
   </div>
+  <security-element url="/admin/index/**">securityElementTest1</security-element>
+  <security-element url="/admin/index/**">securityElementTest11</security-element>
+  <security-element url="/admin/user/role/getPage">securityElementTest2</security-element>
+  <security-element url="/admin/user/role">securityElementTest3</security-element>
   <div id="content" style="float: left;padding: 20px;"></div>
+</div>
 </body>
 </html>

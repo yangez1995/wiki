@@ -47,4 +47,44 @@ public class AdminRoleService implements IAdminRoleService {
 		int updateRole = adminMap.get(updateId);
 		return onLoginRole < updateRole ? true : false;
 	}
+
+	@Override
+	public boolean isHasSetAuthority(int onLoginId, int roleId) {
+		if(adminMap == null) {
+			init();
+		}
+		int onLoginRole = adminMap.get(onLoginId);
+		if(roleId == RoleConfig.SUPER_ADMIN_ROLE_ID) {
+			return false;
+		} else if(roleId == RoleConfig.SYS_ADMIN_SENIOR_ROLE_ID) {
+			return onLoginRole < 1 ? true : false;
+		} else if(roleId == RoleConfig.SYS_ADMIN_ROLE_ID) {
+			return onLoginRole < 2 ? true : false;
+		} else {
+			return true;
+		}
+	}
+	
+	@Override
+	public boolean isHasSetAuthority(int onLoginId, List<Integer> roleIds) {
+		boolean key = true;
+		for(Integer id : roleIds) {
+			if(!isHasSetAuthority(onLoginId, id)) {
+				key = false;
+				break;
+			}
+		}
+		return key;
+	}
+	
+	@Override
+	public boolean isSuperAdmin(int userId) {
+		if(adminMap == null) {
+			init();
+		}
+		if(adminMap.get(userId) == null) {
+			return false;
+		}
+		return adminMap.get(userId) == 0 ? true :false;
+	}
 }

@@ -13,7 +13,7 @@ public class RoleConfig {
 	static {
 		try {
 			Properties properties = new Properties();
-			properties.load(RoleConfig.class.getResourceAsStream("/role.properties"));
+			properties.load(RoleConfig.class.getResourceAsStream("/" + ROLE_PROPERTIES));
 			SUPER_ADMIN_ROLE_ID = Integer.parseInt(properties.getProperty("superAdminRoleId"));
 			SYS_ADMIN_SENIOR_ROLE_ID = Integer.parseInt(properties.getProperty("sysAdminSeniorRoleId"));
 			SYS_ADMIN_ROLE_ID = Integer.parseInt(properties.getProperty("sysAdminRoleId"));

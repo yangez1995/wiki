@@ -9,7 +9,7 @@ $(document).ready(function() {
 			}, {
 				name : '用户名'
 			}, {
-				name : '权限'
+				name : '角色'
 			}, {
 				name : '选项',
 				width : '55px'
@@ -153,6 +153,8 @@ function updateRoles() {
 		success : function(result) {
 			if(result.code == '200') {
 				refreshPage();
+			} else if(result.code == '403'){
+				validateWarningFrame(result.msg);
 			}
 		}
 	});

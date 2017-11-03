@@ -15,14 +15,6 @@
 	<insert id="insert" parameterType="com.yez.wiki.entity.user.Role">
 		INSERT INTO t_role (role_name,des) 
 		VALUES (#{name, jdbcType=VARCHAR}, #{describe, jdbcType=VARCHAR})
-		<selectKey resultType="java.lang.Integer" keyProperty="id">
-    		SELECT LAST_INSERT_ID()
-    	</selectKey>
-	</insert>
-	
-	<insert id="insertLevel" parameterType="java.lang.Integer">
-		INSERT INTO t_role_level (role_id, level)
-		VALUES (#{roleId, jdbcType=INTEGER}, 255)
 	</insert>
 	
 	<delete id="delete" parameterType="java.lang.Integer">

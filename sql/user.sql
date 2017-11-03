@@ -33,7 +33,7 @@ CREATE TABLE t_authority (
 CREATE TABLE t_resources (
   resources_id INT PRIMARY KEY AUTO_INCREMENT,
   resources_name VARCHAR(30) NOT NULL,
-  resources_url VARCHAR(30) NOT NULL,
+  resources_url VARCHAR(100) NOT NULL,
   resources_type CHAR(2) NOT NULL,
   des VARCHAR(100)
 );

@@ -34,7 +34,7 @@ public class SecurityMetadataSourceImpl implements FilterInvocationSecurityMetad
     			ConfigAttribute attr = new SecurityConfig(authority);
     			attrs.add(attr);
     		}
-    		attrs.add(new SecurityConfig("SUPER_ADMIN"));
+    		//attrs.add(new SecurityConfig("SUPER_ADMIN"));
     		resourceMap.put(resource.getUrl(), attrs);
     	}
     }
@@ -42,7 +42,10 @@ public class SecurityMetadataSourceImpl implements FilterInvocationSecurityMetad
 	@Override
 	public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
 		String url = ((FilterInvocation) object).getRequestUrl();
-		//判断url是否有？，如果有截取？之前url
+		return getAttributes(url);
+	}
+
+	public Collection<ConfigAttribute> getAttributes(String url) {
 		int firstQuestionMarkIndex = url.indexOf("?");
         if (firstQuestionMarkIndex != -1) {
             url = url.substring(0, firstQuestionMarkIndex);
@@ -75,7 +78,7 @@ public class SecurityMetadataSourceImpl implements FilterInvocationSecurityMetad
         }
 		return null;
 	}
-
+	
 	@Override
 	public Collection<ConfigAttribute> getAllConfigAttributes() {
 		return null;

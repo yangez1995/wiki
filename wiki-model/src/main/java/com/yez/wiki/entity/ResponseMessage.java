@@ -7,6 +7,7 @@ public class ResponseMessage {
 	
 	public static final String SUCCESS = "200";
 	public static final String FAIL = "400";
+	public static final String ACCESS_DENIED = "403";
 	
 	//构造器
 	public ResponseMessage() {}
@@ -47,6 +48,14 @@ public class ResponseMessage {
 	}
 	public static ResponseMessage fail(String message) {
 		return new ResponseMessage(FAIL, message);
+	}
+	
+	//创建拒绝访问响应信息
+	public static ResponseMessage warning() {
+		return new ResponseMessage(ACCESS_DENIED);
+	}
+	public static ResponseMessage warning(String message) {
+		return new ResponseMessage(ACCESS_DENIED, message);
 	}
 	
 	//Getter And Setter

@@ -29,10 +29,7 @@ public class SpringSecuritySessionUtil {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static List<String> getOnLogUserAuths() throws NoUserLoginException {
-		if(SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
-			throw new NoUserLoginException();
-		}
+	public static List<String> getOnLogUserAuths(){
 		UserDetailsImpl user = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		List<GrantedAuthorityImpl> list = (List<GrantedAuthorityImpl>) user.getAuthorities();
 		List<String> auths = new ArrayList<String>();

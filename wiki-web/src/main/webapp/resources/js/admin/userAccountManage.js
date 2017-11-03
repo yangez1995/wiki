@@ -66,8 +66,8 @@ function lockUser(id) {
 	$.post('user/account/lock', {'id' : id}, function(result) {
 		if(result.code == '200') {
 			refreshPage();
-		} else {
-			validateErrorFrame(result.msg);
+		} else if(result.code == '403'){
+			validateWarningFrame(result.msg);
 		}
 	});
 }
@@ -76,8 +76,8 @@ function unlockUser(id) {
 	$.post('user/account/unlock', {'id' : id}, function(result) {
 		if(result.code == '200') {
 			refreshPage();
-		} else {
-			validateErrorFrame(result.msg);
+		} else if(result.code == '403'){
+			validateWarningFrame(result.msg);
 		}
 	});
 }

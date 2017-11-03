@@ -37,7 +37,7 @@ public class UserAccountService implements IUserAccountService {
 	@Override
 	public ResponseMessage lock(int id) {
 		if(!adminRoleService.isHasAuthority(SpringSecuritySessionUtil.getOnLogUserIdWithOutException(), id)) {
-			return ResponseMessage.fail("你的级别不足以锁定该用户");
+			return ResponseMessage.warning("你的级别不足以锁定该用户");
 		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
@@ -54,7 +54,7 @@ public class UserAccountService implements IUserAccountService {
 	@Override
 	public ResponseMessage unlock(int id) {
 		if(!adminRoleService.isHasAuthority(SpringSecuritySessionUtil.getOnLogUserIdWithOutException(), id)) {
-			return ResponseMessage.fail("你的级别不足以解锁该用户");
+			return ResponseMessage.warning("你的级别不足以解锁该用户");
 		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);

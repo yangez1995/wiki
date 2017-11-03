@@ -15,6 +15,12 @@
 		<result column="authority_mark" property="mark" jdbcType="VARCHAR"/>
 	</resultMap>
 	
+	<select id="getAuths" parameterType="java.lang.Integer" resultMap="AuthMap">
+		SELECT authority_id,authority_name,authority_mark FROM t_authority
+		WHERE authority_id IN (SELECT authority_id FROM t_resources_authorities
+		WHERE resources_id = #{resources_id, jdbcType=INTEGER})
+	</select>
+	
 	<insert id="addAuths" parameterType="java.util.HashMap">
 		INSERT INTO t_resources_authorities
 		(resources_id, authority_id)
@@ -74,12 +80,6 @@
 		</if>
 	</select>
 	
-	<select id="getAuths" parameterType="java.lang.Integer" resultMap="AuthMap">
-		SELECT authority_id,authority_name,authority_mark FROM t_authority
-		WHERE authority_id IN (SELECT authority_id FROM t_resources_authorities
-		WHERE resources_id = #{resources_id, jdbcType=INTEGER})
-	</select>
-	
 	<select id="getOtherAuths" resultMap="AuthMap">
 		SELECT * FROM t_authority
 		WHERE authority_id NOT IN 
@@ -89,8 +89,8 @@
 	</select>
 	
 	<select id="getAllAuths" resultType="java.util.HashMap">
-		SELECT authority_id AS id, authority_name AS name 
-		FROM t_authority
+		SELECT authority_id AS id, authority_name AS name,
+		authority_mark AS mark FROM t_authority
 	</select>
 	
 	<select id="getAuthsId" parameterType="java.lang.Integer" resultType="java.lang.Integer">

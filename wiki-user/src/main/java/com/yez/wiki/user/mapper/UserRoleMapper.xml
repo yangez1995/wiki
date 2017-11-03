@@ -73,9 +73,9 @@
 		WHERE role_id IN (SELECT role_id FROM t_user_roles
 		WHERE user_id = #{user_id, jdbcType=INTEGER})
 	</select>
-	<!-- 等到用户没有的角色列表 -->
-	<select id="getOtherRoles" resultMap="RoleMap">
-		SELECT * FROM t_role
+	<!-- 得到用户没有的角色列表 -->
+	<select id="getOtherRoles" resultType="java.util.HashMap">
+		SELECT role_id AS value,role_name AS name FROM t_role
 		WHERE role_id NOT IN 
 		<foreach collection="list" item="roleId" index="index" open="(" close=")" separator=",">
             #{roleId, jdbcType=INTEGER}
